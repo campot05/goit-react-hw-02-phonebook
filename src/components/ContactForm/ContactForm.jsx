@@ -1,30 +1,36 @@
 import { Component } from 'react';
-
+import css from './ContactForm.module.css';
 class ContactForm extends Component {
   state = {
     name: '',
+    number: '',
   };
 
   handleNameChange = e => {
     this.setState({ name: e.currentTarget.value });
   };
 
+  handleNumberChange = e => {
+    this.setState({ number: e.currentTarget.value });
+  };
+
   handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state.name);
+    this.props.onSubmit(this.state);
     this.reset();
   };
 
   reset = () => {
-    this.setState({ name: '' });
+    this.setState({ name: '', number: '' });
   };
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className={css.contactForm}>
         <label>
           Name <br />
           <input
+            className={css.input}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -35,7 +41,23 @@ class ContactForm extends Component {
           />
         </label>
         <br />
-        <button type="submit">Add contact</button>
+        <label>
+          Number <br />
+          <input
+            className={css.input}
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+            value={this.state.number}
+            onChange={this.handleNumberChange}
+          />
+        </label>
+        <br />
+        <button className={css.btn} type="submit">
+          Add contact
+        </button>
       </form>
     );
   }
