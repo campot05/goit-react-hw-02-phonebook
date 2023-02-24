@@ -54,8 +54,8 @@ class App extends Component {
   };
   render() {
     return (
-      <div class="thumb">
-        <h1 classname="thumb">Phonebook</h1>
+      <div className="thumb">
+        <h1>Phonebook</h1>
         <ContactForm
           onSubmit={this.submitFormData}
           data={this.state.contacts}
